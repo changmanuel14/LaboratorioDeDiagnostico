@@ -1,98 +1,98 @@
 {% extends "layout.html" %}
 {% block content %}
-    <center><h1>Nuevo insumo</h1>
-        <hr>
-        <form action="" method="POST">
-    {% for i in range(numero) %}
-    <input type="text" id="codigo{{i}}" name="codigo{{i}}" class="inputtextpedido" placeholder="  Código" onchange="funcion('{{i}}')" autocomplete="off" list="listado1" required>
-    <input type="text" id="nombre{{i}}" name="nombre{{i}}" class="inputtextpedido" placeholder="  Nombre" onchange="funcion1('{{i}}')" autocomplete="off" list="listado">
-    <input type="number" id="existencia{{i}}" step="0.01" name="existencia{{i}}" class="inputtextpedido" placeholder="  Existencia" disabled>
-    <input type="number" id="necesarios{{i}}" step="0.01" name="necesarios{{i}}" class="inputtextpedido" placeholder="  Necesarios" onchange="diferencia('{{i}}')" required>
-    <input type="number" id="cantidad{{i}}" step="0.01" name="cantidad{{i}}" class="inputtextpedido" placeholder="  Cantidad" readonly><br>
-    {% endfor %}
-    <center><button onclick="submit" class="button">Aceptar</button></center>
-</form>
+<center>
+	<h1>Nuevo insumo</h1>
+	<hr>
+	<form action="" method="POST">
+		{% for i in range(numero) %}
+		<input type="text" id="codigo{{i}}" name="codigo{{i}}" class="inputtextpedido" placeholder="  Código"
+			onchange="funcion('{{i}}')" autocomplete="off" list="listado1" required>
+		<input type="text" id="nombre{{i}}" name="nombre{{i}}" class="inputtextpedido" placeholder="  Nombre"
+			onchange="funcion1('{{i}}')" autocomplete="off" list="listado">
+		<input type="number" id="existencia{{i}}" step="0.01" name="existencia{{i}}" class="inputtextpedido"
+			placeholder="  Existencia" disabled>
+		<input type="number" id="necesarios{{i}}" step="0.01" name="necesarios{{i}}" class="inputtextpedido"
+			placeholder="  Necesarios" onchange="diferencia('{{i}}')" required>
+		<input type="number" id="cantidad{{i}}" step="0.01" name="cantidad{{i}}" class="inputtextpedido"
+			placeholder="  Cantidad" readonly><br>
+		{% endfor %}
+		<center><button onclick="submit" class="button">Aceptar</button></center>
+	</form>
 </center>
 <datalist id="listado1">
-    {% for i in insumos %}
-    <option>{{i[0]}}</option>
-    {% endfor %}
+	{% for i in insumos %}
+	<option>{{i[0]}}</option>
+	{% endfor %}
 </datalist>
 <datalist id="listado">
-    {% for i in insumos %}
-    <option>{{i[1]}}</option>
-    {% endfor %}
+	{% for i in insumos %}
+	<option>{{i[1]}}</option>
+	{% endfor %}
 </datalist>
 <script type="text/javascript">
-    function funcion(num) {
-        // Declare variables
-        var arreglo = {{ insumos|tojson }}
-        var conteo = Object.keys(arreglo).length;
-        var aux = "codigo" + num
-        var aux1 = "nombre" + num
-        var aux2 = "existencia" + num
-        var encontro = 0;
-        for(var j = 0; j<conteo;j++){
-            var valor = document.getElementById(aux).value
-            //console.log(valor)
-            //console.log(arreglo[j][0])
-            if (arreglo[j][0] == valor) {
-                console.log(aux1);
-                console.log(arreglo[j][1]);
-                var nombre = String(arreglo[j][1]);
-                var existencia = String(arreglo[j][2]);
-                document.getElementById(aux2).value = existencia;
-                document.getElementById(aux1).value = nombre;
-                
-                encontro = 1;
-            }
-        }
-
-        if (encontro == 0){
-            document.getElementById(aux1).value = "";
-            document.getElementById(aux2).value = "";
-        }
-      }
-      function funcion1(num) {
-        // Declare variables
-        var arreglo = {{ insumos|tojson }};
-        var conteo = Object.keys(arreglo).length;
-        var aux = "codigo" + num
-        var aux1 = "nombre" + num
-        var aux2 = "existencia" + num
-        var encontro = 0;
-        for(var j = 0; j<conteo;j++){
-            var valor = document.getElementById(aux1).value
-            //console.log(valor)
-            //console.log(arreglo[j][0])
-            if (arreglo[j][1] == valor) {
-                console.log(aux);
-                console.log(arreglo[j][1]);
-                var nombre = String(arreglo[j][0]);
-                var existencia = String(arreglo[j][2]);
-                document.getElementById(aux2).value = existencia;
-                document.getElementById(aux).value = nombre;
-                encontro = 1;
-            }
-        }
-
-        if (encontro == 0){
-            document.getElementById(aux1).value = "";
-            document.getElementById(aux2).value = "";
-        }
-      }
-      function diferencia(num){
-        var aux = "existencia" + num
-        var aux1 = "necesarios" + num
-        var aux2 = "cantidad" + num
-
-        var existencias = parseFloat(document.getElementById(aux).value);
-        var necesarios = parseFloat(document.getElementById(aux1).value);
-        var total = necesarios - existencias;
-        console.log(existencias, necesarios, total)
-        document.getElementById(aux2).value = String(total)
-    }
+	function funcion(num) {
+		// Declare variables
+		var arreglo = {{ insumos| tojson }}
+	var conteo = Object.keys(arreglo).length;
+	var aux = "codigo" + num
+	var aux1 = "nombre" + num
+	var aux2 = "existencia" + num
+	var encontro = 0;
+	for (var j = 0; j < conteo; j++) {
+		var valor = document.getElementById(aux).value
+		//console.log(valor)
+		//console.log(arreglo[j][0])
+		if (arreglo[j][0] == valor) {
+			console.log(aux1);
+			console.log(arreglo[j][1]);
+			var nombre = String(arreglo[j][1]);
+			var existencia = String(arreglo[j][2]);
+			document.getElementById(aux2).value = existencia;
+			document.getElementById(aux1).value = nombre;
+			encontro = 1;
+		}
+	}
+	if (encontro == 0) {
+		document.getElementById(aux1).value = "";
+		document.getElementById(aux2).value = "";
+	}
+		}
+	function funcion1(num) {
+		// Declare variables
+		var arreglo = {{ insumos| tojson }};
+	var conteo = Object.keys(arreglo).length;
+	var aux = "codigo" + num
+	var aux1 = "nombre" + num
+	var aux2 = "existencia" + num
+	var encontro = 0;
+	for (var j = 0; j < conteo; j++) {
+		var valor = document.getElementById(aux1).value
+		//console.log(valor)
+		//console.log(arreglo[j][0])
+		if (arreglo[j][1] == valor) {
+			console.log(aux);
+			console.log(arreglo[j][1]);
+			var nombre = String(arreglo[j][0]);
+			var existencia = String(arreglo[j][2]);
+			document.getElementById(aux2).value = existencia;
+			document.getElementById(aux).value = nombre;
+			encontro = 1;
+		}
+	}
+	if (encontro == 0) {
+		document.getElementById(aux1).value = "";
+		document.getElementById(aux2).value = "";
+	}
+		}
+	function diferencia(num) {
+		var aux = "existencia" + num
+		var aux1 = "necesarios" + num
+		var aux2 = "cantidad" + num
+		var existencias = parseFloat(document.getElementById(aux).value);
+		var necesarios = parseFloat(document.getElementById(aux1).value);
+		var total = necesarios - existencias;
+		console.log(existencias, necesarios, total)
+		document.getElementById(aux2).value = String(total)
+	}
 </script>
-
-    
 {% endblock %}

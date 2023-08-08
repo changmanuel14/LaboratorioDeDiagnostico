@@ -1230,7 +1230,6 @@ def liquidacionoc(id):
 			conexion.close()
 	except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
 		print("Ocurrió un error al conectar: ", e)
-
 	return redirect(url_for('inicio'))
 
 @app.route('/ordencompimprimir/<id>')
