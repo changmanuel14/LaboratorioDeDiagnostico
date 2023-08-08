@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+    <button type="button" class="button"><a style="color: white;" href="/ordencompimprimir/{{id}}" target="_blank">Imprimir PDF</a></button>
+    <button type="button" class="button"><a style="color: white;" href="/liquidacionoc/{{id}}">Liquidar</a></button>
+    <div id="tblinfo" class="tblinfo"><br>
+        <h6>Universidad Galileo</h6>
+        <h6>Facultad de Ciencias de la Salud</h6>
+        <h6>Sede Quetzaltenango</h6>
+        <h6>Departamento de Compras</h6>
+        <hr>
+        <center><h4>Orden de Compra</h4></center>
+        <center><h4>{{ dataheader[0][0] }}</h4></center>
+        <hr>
+        <div style="float: right;">
+            <h6>Proveedor: {{ dataheader[0][1] }}</h6>
+            {% if idproveedor == '6' %}
+            <h6>No. Cotización: No aplica</h6>
+            {% else %}
+            <h6>No. Cotización: {{ dataheader[0][4] }}</h6>
+            {% endif %}
+            <h6>Generado por: {{ dataheader[0][2] }}</h6>
+            <h6>Generado en: {{ dataheader[0][3] }}</h6>
+        </div>
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>Insumo</th>
+                <th>Presentación</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+            {% for i in range(cantidad) %}
+            <tr>
+                <td>{{i + 1}}</td>
+                <td>{{datadesc[i][0]}}</td>
+                <td>{{datadesc[i][1]}}</td>
+                <td>{{datadesc[i][2]}}</td>
+                <td>Q. {{datadesc[i][3]}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th colspan="4" style="text-align: right;">Total</th>
+                <td>Q. {{total}}</td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        function PdfDownload(filename){
+            kendo.drawing.drawDOM($("#tblinfo"))
+            .then(function(group){
+                return kendo.drawing.exportPDF(
+                    group,{
+                        paperSize: "auto",
+                        margin: "2cm"
+                    });
+            })
+            .done(function(data){
+                kendo.saveAs({
+                    dataURI: data,
+                    fileName:filename
+                });
+            });
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>{{ nombreped }}</h1>
+    <h1>Ingreso de cotizacion</h1>
+    <button type="button" class="button"><a style="color: white;" href="/agregarinsumos/1%26{{header}}">Agregar insumo</a></button>
+    <button type="button" class="button"><a style="color: white;" href="/nuevacotizacion/{{header}}">Agregar cotizacion</a></button>
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>Insumo</th>
+            <th>Presentación</th>
+            <th colspan="3"><center>Cantidad</center></th>
+            <th>Eliminar</th>
+        </tr>
+        {% for i in range(cantidad) %}
+        <tr>
+            <td>{{i + 1}}</td>
+			<td>{{insumos[i][3]}}</td>
+            <td>{{insumos[i][0]}}</td>
+            <td>{{insumos[i][1]}}</td>
+            <td><button type="button" class="masmenos" onclick="menos({{i}})">-</button></td>
+            <td><center><input type="number" step="0.01" id="cant{{i}}" name="cant{{i}}" class="masmenos" value="{{insumos[i][2]}}"></center></td>
+            <td><button type="button" class="masmenos" onclick="mas({{i}})">+</button></td>
+            <td><button type="button" class="masmenos"><a href="/eliminarregistro/{{insumos[i][3]}}">Eliminar</a></button></td>
+        {% endfor %}
+    </table>
+    <script>
+        function menos(num) {
+            var aux = "cant" + String(num)
+            var cant = document.getElementById(aux).value;
+            cant = parseFloat(cant);
+            cant = cant - 1;
+            document.getElementById(aux).value = cant;
+        }
+        function mas(num) {
+            var aux = "cant" + String(num)
+            var cant = document.getElementById(aux).value;
+            cant = parseFloat(cant);
+            cant = cant + 1;
+            document.getElementById(aux).value = cant;
+        }
+    </script>
+{% endblock %}

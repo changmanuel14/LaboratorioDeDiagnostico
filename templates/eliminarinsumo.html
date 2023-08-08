@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+    <center><h1>Eliminar insumo</h1></center>
+    <hr>
+    <form action="" method="POST">    
+    <h4>Nombre: {{insumo[0][0]}}</h4>
+    <h4>Código: {{insumo[0][1]}}</h4>
+    <h4>Presentación: {{insumo[0][2]}}</h4>
+    <h4>Existencia: {{insumo[0][3]}}</h4>
+    <h4>Tipo: {{insumo[0][4]}}</h4>
+    
+    <center><button onclick="submit" class="button">Aceptar</button></center>
+</form>
+
+
+    
+{% endblock %}

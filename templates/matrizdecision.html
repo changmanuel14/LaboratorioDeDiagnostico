@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>{{ nombre }}</h1>
+    <form action="" method="POST"> 
+        <center><button onclick="submit" class="button">Generar ordenes de compra</button></center>  
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>Codigo</th>
+            <th>Insumo</th>
+            <th>Presentacion</th>
+            <th>Cantidad</th>
+            {% for i in cotheaders %}
+            <th>{{i[1]}}</th>
+            {% endfor %}
+            <th>Proveedor</th>
+        </tr>
+        {% for i in range(numero) %}
+        <tr>
+            <td>{{i + 1}}</td>
+            <td >{{insumos[i][0]}}</td>
+            <td>{{insumos[i][1]}}</td>
+            <td>{{insumos[i][2]}}</td>
+            <td>{{insumos[i][3]}}</td>
+            {% for j in range(numero1) %}
+            <td id="{{j}},{{i}}">{{precios[j][i][1]}}</td>
+            {% endfor %}
+            <td>
+                <select name="proveedor{{insumos[i][5]}}" id="proveedor{{insumos[i][5]}}" class="inputtext" required>
+                    <option value="">Seleccione proveedor</option>
+                    {% for i in proveedores %}
+                    <option value="{{i[0]}}">{{i[1]}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        {% endfor %}
+    </table>
+    
+    </form>
+    <script>
+        window.onload = function menos() {
+            var num = {{numero}}
+            var num1 = {{numero1}}
+
+            num = parseInt(num)
+            num1 = parseInt(num1)
+            for(var i = 0; i<num; i++) {
+                var menor = 100000
+                for(var j=0; j<num1;j++){
+                    var aux = String(j) + ',' + String(i)
+                    var dato = document.getElementById(aux).innerHTML
+                    if(dato == '0.0'){
+                        document.getElementById(aux).style.backgroundColor = "orange"
+                    }else if(menor > parseFloat(dato)) {
+                        menor = parseFloat(dato)
+                    }
+                }
+                if(menor != 100000) {
+                    for(var j=0; j<num1;j++){
+                        var aux = String(j) + ',' + String(i)
+                        var dato = document.getElementById(aux).innerHTML
+                        if(parseFloat(dato) == menor){
+                            document.getElementById(aux).style.backgroundColor = "green"
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+{% endblock %}

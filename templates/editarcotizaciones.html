@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>{{ nombre }}</h1>
+    <form action="" method="POST">   
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>Codigo</th>
+            <th>Insumo</th>
+            <th>Presentacion</th>
+            <th>Cantidad</th>
+            {% for i in cotheaders %}
+            <th>{{i[1]}}</th>
+            {% endfor %}
+        </tr>
+        {% for i in range(numero) %}
+        <tr>
+            <td>{{i + 1}}</td>
+            <td >{{insumos[i][0]}}</td>
+            <td>{{insumos[i][1]}}</td>
+            <td>{{insumos[i][2]}}</td>
+            <td>{{insumos[i][3]}}</td>
+            {% for j in range(numero1) %}
+            <td><input type="number" step="0.01" style="background-color: white;" id="{{j}},{{i}}" name="c{{precios[j][i][0]}}" value="{{precios[j][i][1]}}" class="inputtext"> </td>
+            {% endfor %}
+        {% endfor %}
+    </table>
+    <center><button onclick="submit" class="button">Guardar cambios</button></center>
+{% endblock %}

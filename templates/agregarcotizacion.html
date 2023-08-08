@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>{{nombre}}</h1>
+    <form action="" method="POST">
+        <select name="proveedor" id="proveedor" class="inputtext3" onchange="nuevoprov()">
+            <option value="">Seleccione proveedor</option>
+            <option value="Nuevo">Nuevo Proveedor</option>
+            {% for i in proveedores %}
+            <option value="{{i[0]}}">{{i[1]}}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="nuevoproveedor" id="nuevoproveedor" class="inputtext3" placeholder=" Nombre proveedor" disabled>
+        <input type="text" name="numdoc" id="numdoc" class="inputtext3" placeholder=" No. Documento">
+        <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+        <table class="sortable">
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Presentacion</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+        </tr>
+        {% for i in insumos %}
+        <tr>
+			<td>{{i[3]}}</td>
+            <td>{{i[0]}}</td>
+			<td>{{i[2]}}</td>
+            <td>{{i[1]}}</td>
+            <td><input type="number" step="0.01" name="precio{{i[4]}}" id="precio{{i[4]}}" class="masmenos" style="border: black; border-width: 1px;"></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <center><button onclick="submit" class="button">Aceptar</button></center>
+</form>
+<script>
+    function nuevoprov() {
+        var dato = document.getElementById("proveedor").value;
+        if(dato=="Nuevo"){
+            document.getElementById("nuevoproveedor").disabled = false;
+        }else{
+            document.getElementById("nuevoproveedor").disabled = true;
+            document.getElementById("nuevoproveedor").value = "";
+        }
+    }
+</script>
+{% endblock %}

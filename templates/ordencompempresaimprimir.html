@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <style type="text/css">
+    .letragrande{
+        font-size: 25px;
+    }
+    .derecha {
+        float: right;
+        width: 40%;
+        position: relative;
+    }
+
+    .derecha1 {
+        float: right;
+        width: 50%;
+        position: relative;
+    }
+
+    .izquierda {
+        float: left;
+        width: 100%;
+        position: relative;
+    }
+
+    .izquierda1 {
+        float: left;
+        width: 40%;
+        position: relative;
+    }
+    h1, h2, h3, h4, h5, h6, p, label {
+        color: #000000;
+    }
+    table, th, td {
+        border: 1px solid black;
+        color: #000000;
+        border-collapse: collapse;
+    }
+
+    </style>
+    {% if title %}
+        <title>{{ title }} - Universidad Galileo</title>
+    {% else %}
+        <title>Universidad Galileo</title>
+    {% endif %}
+    <style type="text/css">
+        * { margin: 0; padding: 0; }
+        .clear { clear: both; }
+        #page-wrap { width: 800px; margin: 40px auto 60px; }
+        #pic { float: right; margin: -30px 0 0 0; }
+        #page-wrap h2 { font-size: 20px; margin: 0 0 6px 0; position: relative; }
+        #page-wrap h2 span { position: absolute; bottom: 0; right: 0; font-style: italic; font-family: Georgia, Serif; font-size: 16px; color: #999; font-weight: normal; }
+        #page-wrap a:hover { border-bottom-style: solid; color: black; }
+        #page-wrap ul { margin: 0 0 32px 17px; }
+        #page-wrap #objective { width: 500px; float: left; }
+        #page-wrap #objective p { font-family: Georgia, Serif; font-style: italic; color: #666; }
+        #page-wrap dt { font-style: italic; font-weight: bold; font-size: 18px; text-align: right; padding: 0 26px 0 0; width: 150px; float: left; height: 200px; border-right: 1px solid #999;  }
+        #page-wrap dd { width: 600px; float: right; }
+        #page-wrap dd.clear { float: none; margin: 0; height: 15px; }
+     </style>
+     <style type="text/css">
+        body {
+  background: #fafafa;
+  color: #333333;
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #dddddd;
+}
+
+td, th {
+  font-size: 16px;
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+        
+            </style>
+</head>
+<body>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <div id="tblinfo1">
+                    <h6>Universidad Galileo</h6>
+        <h6>Facultad de Ciencias de la Salud</h6>
+        <h6>Sede Quetzaltenango</h6>
+        <h6>Departamento de Compras</h6>
+        <hr>
+        <center><h4>Ordenes de Compra</h4></center>
+        <center><h4>{{ data[0][4] }}</h4></center>
+        <center><h4>Total: Q {{ total }}</h4></center>
+        {% for i in range(cantidad) %}
+        {% if data[i][0] != data[i-1][0] and i!=0 %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% if i == 0 or data[i][0] != data[i-1][0] %}
+        <br>
+        <br>
+        <hr>
+        <div style="float: left;">
+            <h4>Pedido: {{ data[i][0] }}</h4>
+            {% if id == '6' %}
+            <h6>No. Cotización: No aplica</h6>
+            {% else %}
+            <h6>No. Cotización: {{ data[i][1] }}</h6>
+            {% endif %}
+            <h6>Generado por: {{ data[i][3] }}</h6>
+            <h6>Generado en: {{ data[i][2] }}</h6>
+        </div>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Insumo</th>
+                    <th>Presentacíon</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{data[i][5]}}</td>
+                    <td>{{data[i][6]}}</td>
+                    <td>{{data[i][7]}}</td>
+                    <td>{{data[i][8]}}</td>
+                </tr>
+        {% endif %}
+        {% if data[i][0] == data[i-1][0]  and i != 0  %}
+        <tr>
+            <td>{{i+1}}</td>
+            <td>{{data[i][5]}}</td>
+            <td>{{data[i][6]}}</td>
+            <td>{{data[i][7]}}</td>
+            <td>{{data[i][8]}}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <h1>Total: Q {{total}}</h1>
+        </div>
+    </main>
+    <br><br><br><br>
+    <footer class="page-footer font-small bg-steel">
+
+        <!-- Copyright -->
+        <!-- Copyright -->
+
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>

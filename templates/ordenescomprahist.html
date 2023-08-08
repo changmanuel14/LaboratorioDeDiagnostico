@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Ordenes de Compra - Historico</h1>
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>Nombre</th>
+        </tr>
+        {% for i in range(cantidad) %}
+        <tr>
+            <td>{{i + 1}}</td>
+            <td><a href="/ordencomphist/{{pedidos[i][0]}}">{{pedidos[i][1]}}</a></td>
+        {% endfor %}
+    </table>
+{% endblock %}

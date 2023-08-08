@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Desechables</h1>
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+    <table class="sortable">
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Presentacion</th>
+            <th>Tipo</th>
+            <th>Existencia</th>
+            {% if logeado == 1 %}
+            <th>Editar</th>
+            <th>Eliminar</th>
+            {% endif %}
+        </tr>
+        {% for i in insumos %}
+        <tr>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[4]}}</td>
+            {% if logeado == 1 %}
+            <td><a href="/editarinsumo/{{i[5]}}">Editar</a></td>
+            <td><a href="/eliminarinsumo/{{i[5]}}">Eliminar</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

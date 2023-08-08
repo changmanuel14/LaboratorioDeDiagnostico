@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+<button type="button" class="button"><a style="color: white;" href="/nuevacotizacion">Agregar cotización</a></button>
+{% if cantcot != 0 %}
+<button type="button" class="button"><a style="color: white;" href="/editarcotizaciones">Editar cotizaciones</a></button>
+<button type="button" class="button"><a style="color: white;" href="/matrizdecision">Matriz de Decisión</a></button>
+{% endif %}
+    <button type="button" class="button" onclick="PdfDownload('{{nombreped}}')">Imprimir PDF</button>
+    <div id="tblinfo" class="tblinfo"><br>
+        <h6>Universidad Galileo</h6>
+        <h6>Facultad de Ciencias de la Salud</h6>
+        <h6>Sede Quetzaltenango</h6>
+        <h6>Departamento de Compras</h6>
+        <hr>
+        <center><h4>Pedido General</h4></center>
+        <hr>
+        <table>
+            <tr>
+                <th>No.</th>
+                <th>Insumo</th>
+                <th>Presentación</th>
+                <th>Cantidad</th>
+            </tr>
+            {% for i in range(cantidad) %}
+            <tr>
+                <td>{{i + 1}}</td>
+                <td>{{insumos[i][0]}}</td>
+                <td>{{insumos[i][1]}}</td>
+                <td>{{insumos[i][2]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <script type="text/javascript">
+        function PdfDownload(filename){
+            kendo.drawing.drawDOM($("#tblinfo"))
+            .then(function(group){
+                return kendo.drawing.exportPDF(
+                    group,{
+                        paperSize: "auto",
+                        landscape: false,
+                        margin: "2cm",
+                        multiPage: true,
+                    });
+            })
+            .then(function(data){
+                kendo.saveAs({
+                    dataURI: data,
+                    fileName:filename
+                });
+            });
+        }
+    </script>
+{% endblock %}

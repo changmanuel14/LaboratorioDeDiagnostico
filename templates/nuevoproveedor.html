@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+    <center><h1>Nuevo proveedor</h1>
+        <hr>
+        <form action="" method="POST">
+    <input type="text" id="nombre" name="nombre" class="inputtext3" placeholder="  Nombre" required>
+    <input type="number" id="telefono" name="telefono" class="inputtext3" placeholder="  Telefono">
+    <input type="email" id="correo" name="correo" class="inputtext3" placeholder="  Correo"><br>
+    <center><input type="text" id="nombrecontacto" name="nombrecontacto" class="inputtext3" placeholder="  Nombre de Contacto" required></center>
+    <center><button onclick="submit" class="button">Aceptar</button></center>
+</form>
+</center>
+{% endblock %}

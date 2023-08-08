@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block content %}
+    <button type="button" class="button"><a style="color: white;" href="/ordencompempresaimprimir/{{id}}" target="_blank">Imprimir PDF</a></button>
+    <div id="tblinfo" class="tblinfo"><br>
+        <h6>Universidad Galileo</h6>
+        <h6>Facultad de Ciencias de la Salud</h6>
+        <h6>Sede Quetzaltenango</h6>
+        <h6>Departamento de Compras</h6>
+        <hr>
+        <center><h4>Ordenes de Compra</h4></center>
+        <center><h4>{{ data[0][4] }}</h4></center>
+        <center><h4>Total: Q {{ total }}</h4></center>
+        {% for i in range(cantidad) %}
+        {% if data[i][0] != data[i-1][0] and i != 0 %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% if i == 0 or data[i][0] != data[i-1][0] %}
+        <br>
+        <br>
+        <hr>
+        <div style="float: left;">
+            <h4>Pedido: {{ data[i][0] }}</h4>
+            {% if id == '6' %}
+            <h6>No. Cotización: No aplica</h6>
+            {% else %}
+            <h6>No. Cotización: {{ data[i][1] }}</h6>
+            {% endif %}
+            <h6>Generado por: {{ data[i][3] }}</h6>
+            <h6>Generado en: {{ data[i][2] }}</h6>
+        </div>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Insumo</th>
+                    <th>Presentacíon</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{data[i][5]}}</td>
+                    <td>{{data[i][6]}}</td>
+                    <td>{{data[i][7]}}</td>
+                    <td>{{data[i][8]}}</td>
+                </tr>
+        {% endif %}
+        {% if data[i][0] == data[i-1][0] and i != 0 %}
+        <tr>
+            <td>{{i+1}}</td>
+            <td>{{data[i][5]}}</td>
+            <td>{{data[i][6]}}</td>
+            <td>{{data[i][7]}}</td>
+            <td>{{data[i][8]}}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <h1>Total: Q {{total}}</h1>
+{% endblock %}

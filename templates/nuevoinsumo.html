@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+    <center><h1>Nuevo insumo</h1>
+        <hr>
+        <form action="" method="POST">
+    <select name="tipo" id="tipo" class="inputtext3">
+        <option value="">Seleccione Tipo</option>
+        {% for i in tipos %}
+        <option value="{{i[0]}}">{{i[1]}}</option>
+        {% endfor %}
+    </select><br>
+    <input type="text" id="nombre" name="nombre" class="inputtext1" placeholder="  Nombre"><br>
+    <input type="text" id="presentacion" name="presentacion" class="inputtext3" placeholder="  Presentación">
+    <input type="text" id="peligrosidad" name="peligrosidad" class="inputtext3" placeholder="  Peligrosidad"><br>
+    <input type="number" step="0.01" id="cantidad" name="cantidad" class="inputtext3" placeholder="  Cantidad">
+    <input placeholder="  Fecha de Vencimiento" class="inputtext3" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="fechaven" name="fechaven"/><br>
+    <input type="text" id="min" name="min" class="inputtext3" placeholder="  Mínimos">
+    <input type="text" id="max" name="max" class="inputtext3" placeholder="  Máximos">
+    <center><button onclick="submit" class="button">Aceptar</button></center>
+</form>
+</center>
+
+    
+{% endblock %}

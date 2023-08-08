@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Proveedores</h1>
+    <button type="button" class="button"><a style="color: white;" href="/nuevoproveedor">Nuevo proveedor</a></button>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Contacto</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        {% for i in proveedores %}
+        <tr>
+            <td>{{i[1]}}</td>
+            <td>{{i[4]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td><a href="/editarproveedor/{{i[0]}}">Editar</a></td>
+            <td><a href="/eliminarproveedor/{{i[0]}}">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Ordenes de Compra</h1>
+    <table>
+        <tr>
+            <th style="width: 20%;">No.</th>
+            <th>Nombre</th>
+        </tr>
+        {% for i in range(cantidad) %}
+        <tr>
+            <td>{{i + 1}}</td>
+            <td><a href="/ordencomp/{{pedidos[i][0]}}">{{pedidos[i][1]}}</a></td>
+        {% endfor %}
+    </table>
+    <br>
+    <h1>Por empresa</h1>
+    <table>
+        <tr>
+            <th style="width: 20%;">No.</th>
+            <th>Nombre</th>
+        </tr>
+        {% for i in range(cantidad1) %}
+        <tr>
+            <td>{{i + 1}}</td>
+            <td><a href="/ordencompempresa/{{empresas[i][0]}}">{{empresas[i][1]}}</a></td>
+        {% endfor %}
+    </table>
+{% endblock %}

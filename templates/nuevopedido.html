@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action="" method="POST">    
+    <center><h1>Nuevo pedido</h1>
+        <hr>
+        <button onclick="submit" class="button">Aceptar</button>
+        <input type="text" id="nombre" name="nombre" class="inputtext3" placeholder="  Nombre">
+    <center>
+        <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+        <table class="sortable">
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Presentacion</th>
+                <th>Existencia</th>
+                <th>Necesarios</th>
+                <th>Total</th>
+            </tr>
+            {% for i in insumos %}
+            <tr>
+                <td>{{i[0]}}</td>
+                <td>{{i[1]}}</td>
+                <td>{{i[2]}}</td>
+                <td id="existencia{{i[4]}}" name="existencia{{i[4]}}">{{i[3]}}</td>
+                <td><input type="number" id="necesarios{{i[4]}}" name="necesarios{{i[4]}}" step="0.01" onchange="diferencia('{{i[4]}}')"></td>
+                <td><input type="number" id="total{{i[4]}}" name="total_{{i[4]}}" readonly></td>
+            </tr>
+            {% endfor %}
+        </table>
+</form>
+<script type="text/javascript">
+    function diferencia(num){
+        var aux = "existencia" + num
+        var aux1 = "necesarios" + num
+        var aux2 = "total" + num
+
+        var existencias = parseFloat(document.getElementById(aux).innerHTML);
+        var necesarios = parseFloat(document.getElementById(aux1).value);
+        var total = necesarios - existencias;
+        document.getElementById(aux2).value = String(total.toFixed(2))
+    }
+</script>
+    
+{% endblock %}
