@@ -10,6 +10,7 @@ from os import getcwd, path
 import os
 from PIL import Image
 from fpdf import FPDF
+from conexion import Conhost, Conuser, Conpassword, Condb
 
 app = Flask(__name__)
 app.secret_key = 'd589d3d0d15d764ed0a98ff5a37af547'
@@ -47,7 +48,7 @@ def inhojareq():
 		idtipouser = 0
 		return redirect(url_for('login'))
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select codigo, nombre, presentacion from insumos where activo = 1 order by codigo asc;"
@@ -71,7 +72,7 @@ def inhojareq():
 		if(len(semestre) == 0):
 			semestre = 'null'
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "INSERT INTO egresosheader(solicitante, fecha, curso, semestre, carrera, numhojareq) VALUES (%s, %s, %s, %s, %s, %s);"
@@ -82,7 +83,7 @@ def inhojareq():
 		except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
 			print("Ocurrió un error al conectar: ", e)
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "select MAX(idegresosheader) from egresosheader;"
@@ -101,7 +102,7 @@ def inhojareq():
 			aux = 'recibe' + str(i)
 			recibe = request.form[aux]
 			try:
-				conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+				conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 				try:
 					with conexion.cursor() as cursor:
 						consulta = "select idinsumos, existencia from insumos where codigo = %s and activo = 1;"
@@ -132,7 +133,7 @@ def inextra():
 		idtipouser = 0
 		return redirect(url_for('login'))
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select codigo, nombre, presentacion from insumos where activo = 1 order by codigo asc;"
@@ -149,7 +150,7 @@ def inextra():
 		numhojareq = request.form['numhojareq']
 		numhojareq = "Formulario de ingreso " + str(numhojareq)
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "INSERT INTO ingresosheader(nombreordencompra, idordencompra, documento, fecha, user) VALUES (%s, null, %s, %s, %s);"
@@ -160,7 +161,7 @@ def inextra():
 		except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
 			print("Ocurrió un error al conectar: ", e)
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "select MAX(idingresosheader) from ingresosheader;"
@@ -177,7 +178,7 @@ def inextra():
 			aux = 'cantidad' + str(i)
 			cant = request.form[aux]
 			try:
-				conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+				conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 				try:
 					with conexion.cursor() as cursor:
 						consulta = "select idinsumos, existencia from insumos where codigo = %s and activo=1;"
@@ -228,7 +229,7 @@ def inpedido():
 		idtipouser = 0
 		return redirect(url_for('login'))
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select codigo, nombre, presentacion from insumos where activo = 1 order by codigo asc;"
@@ -245,7 +246,7 @@ def inpedido():
 		numhojareq = request.form['numhojareq']
 		numhojareq = "Factura " + str(numhojareq)
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "INSERT INTO ingresosheader(nombreordencompra, idordencompra, documento, fecha, user) VALUES (%s, null, %s, %s, %s);"
@@ -257,7 +258,7 @@ def inpedido():
 			print("Ocurrió un error al conectar: ", e)
 		
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "select MAX(idingresosheader) from ingresosheader;"
@@ -274,7 +275,7 @@ def inpedido():
 			aux = 'cantidad' + str(i)
 			cant = request.form[aux]
 			try:
-				conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+				conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 				try:
 					with conexion.cursor() as cursor:
 						consulta = "select idinsumos, existencia from insumos where codigo = %s and activo=1;"
@@ -306,7 +307,7 @@ def documentosingresos():
 		return redirect(url_for('login'))
 	print(PATH_FILE)
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				cursor.execute("select documento, nombreordencompra, fecha from ingresosheader group by documento order by fecha desc;")
@@ -432,7 +433,7 @@ def kardex():
 	idinsumo = 0
 	actual = fechaactual.strftime("%d/%m/%Y %H:%M")
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select codigo, nombre, presentacion from insumos where activo = 1 order by codigo asc;"
@@ -447,7 +448,7 @@ def kardex():
 		nombre = request.form['nombre']
 		ins = nombre
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "select idinsumos, existencia from insumos where activo = 1 and codigo = %s;"
@@ -503,7 +504,7 @@ def imprimirkardex(idinsumo):
 	fechaactual = datetime.now()
 	actual = fechaactual.strftime("%d/%m/%Y %H:%M")
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select idinsumos, existencia, codigo, nombre from insumos where activo = 1 and idinsumos = %s;"
@@ -570,7 +571,7 @@ def login():
 		user = request.form["user"]
 		pwd = request.form["pwd"]
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "SELECT idusers, nombre, idtipouser FROM users WHERE user = %s and pwd = md5(%s)"
@@ -609,7 +610,7 @@ def inicio():
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				cursor.execute("SELECT i.codigo, i.nombre, i.presentacion, t.tipo, i.existencia, DATE_FORMAT(i.fechavencimiento,'%d/%m/%Y') as fechavencimiento, i.minimos, i.maximos from insumos i inner join tipo t ON i.idtipo = t.idtipo where i.activo = 1  order by t.tipo asc, codigo asc;")
@@ -635,7 +636,7 @@ def nuevoproveedor():
 		nombrecontacto = request.form["nombrecontacto"]
 		correo = request.form["correo"]
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "INSERT INTO proveedores(nombre, telefono, correo, activo, nombrecontacto) values (%s, %s, %s, 1, %s);"
@@ -658,7 +659,7 @@ def crearusuario():
 		idtipouser = 0
 		return redirect(url_for('login'))
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "SELECT idtipouser, tipouser FROM inventario.tipouser;"
@@ -674,7 +675,7 @@ def crearusuario():
 		pwd = request.form["password"]
 		tipouser = request.form["tipouser"]
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "INSERT INTO users(nombre, user, pwd, idtipouser) values (%s, %s, MD5(%s), %s);"
@@ -697,7 +698,7 @@ def nuevoinsumo():
 		idtipouser = 0
 		return redirect(url_for('login'))
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				cursor.execute("SELECT idtipo, tipo from tipo;")
@@ -733,7 +734,7 @@ def nuevoinsumo():
 
 
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "SELECT MAX(codigo) from insumos where idtipo = %s and activo = 1;"
@@ -757,7 +758,7 @@ def nuevoinsumo():
 		codigo = letra + str(maxid)
 
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "INSERT INTO insumos(idtipo, codigo, nombre, presentacion, existencia, idpeligrosidad, activo, fechavencimiento, minimos, maximos) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"
@@ -780,7 +781,7 @@ def nuevopedido():
 		idtipouser = 0
 
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				cursor.execute("SELECT i.codigo, i.nombre, i.presentacion, i.existencia, i.idinsumos from insumos i where i.activo = 1  order by i.nombre asc;")
@@ -795,7 +796,7 @@ def nuevopedido():
 		nombre = request.form["nombre"]
 		#insercion de pedido header
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "INSERT INTO pedidosheader(nombre, fecha) values (%s, %s);"
@@ -807,7 +808,7 @@ def nuevopedido():
 			print("Ocurrió un error al conectar: ", e)
 		#obtencion de id del pedido header
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "SELECT max(idpedidosheader) FROM inventario.pedidosheader;"
@@ -824,7 +825,7 @@ def nuevopedido():
 			if len(cantinsumo) > 0 and float(cantinsumo) > 0:
 				cantinsumo = float(cantinsumo)
 				try:
-					conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+					conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 					try:
 						with conexion.cursor() as cursor:
 							consulta = "INSERT INTO pedidosdesc(idheader, idinsumo, cantidad, activo, presentacion) values (%s, %s, %s,1,%s);"
@@ -847,7 +848,7 @@ def agregarinsumos(numero, idheader):
 		idtipouser = 0
 	numero = int(numero)
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select codigo, nombre, existencia from insumos where activo = 1;"
@@ -867,7 +868,7 @@ def agregarinsumos(numero, idheader):
 			insumo.append(request.form[aux])
 			insumos.append(insumo)
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					for i in range(numero):
@@ -893,7 +894,7 @@ def agregarcotizacion(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select nombre from pedidosheader where idpedidosheader = %s"
@@ -920,7 +921,7 @@ def agregarcotizacion(id):
 		if proveedor == 'Nuevo':
 			newproveedor = request.form['nuevoproveedor']
 			try:
-				conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+				conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 				try:
 					with conexion.cursor() as cursor:
 						consulta = "INSERT INTO proveedores(nombre, telefono, correo, activo) values (%s, 0, '0', 1);"
@@ -931,7 +932,7 @@ def agregarcotizacion(id):
 			except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
 				print("Ocurrió un error al conectar: ", e)
 			try:
-				conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+				conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 				try:
 					with conexion.cursor() as cursor:
 						consulta = "SELECT idproveedores FROM proveedores ORDER BY idproveedores desc;"
@@ -943,7 +944,7 @@ def agregarcotizacion(id):
 			except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
 				print("Ocurrió un error al conectar: ", e)
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "INSERT INTO cotizacionheader(idproveedor, idpedidosheader, codigo, activo) values (%s,%s,%s,1);"
@@ -959,7 +960,7 @@ def agregarcotizacion(id):
 			if len(cantidad) < 1:
 				cantidad = 0
 			try:
-				conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+				conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 				try:
 					with conexion.cursor() as cursor:
 						consulta = "SELECT idcotizacionheader from cotizacionheader ORDER BY idcotizacionheader desc;"
@@ -985,7 +986,7 @@ def matrizdecision(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select nombre from pedidosheader where idpedidosheader = %s order by fecha asc;"
@@ -1033,7 +1034,7 @@ def matrizdecision(id):
 			if prov not in provaux:
 				provaux.append(prov)
 			try:
-				conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+				conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 				try:
 					with conexion.cursor() as cursor:
 						if int(prov) != 6:
@@ -1059,7 +1060,7 @@ def matrizdecision(id):
 			except (pymysql.err.OperationalError, pymysql.err.InternalError) as e:
 				print("Ocurrió un error al conectar: ", e)
 			try:
-				conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+				conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 				try:
 					with conexion.cursor() as cursor:
 						consulta = 'SELECT idordencompraheader FROM ordencompraheader WHERE idproveedor = ' + str(prov)  + ' and idpedido = ' + str(id) +';'
@@ -1095,7 +1096,7 @@ def pedidohist(idheader):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select nombre from pedidosheader where idpedidosheader = %s;"
@@ -1142,7 +1143,7 @@ def editarcotizaciones(idheader):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select nombre from pedidosheader where idpedidosheader = %s;"
@@ -1181,7 +1182,7 @@ def editarcotizaciones(idheader):
 		print("Ocurrió un error al conectar: ", e)
 	if request.method == 'POST':
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					for j in cotheaders:
@@ -1211,7 +1212,7 @@ def pedidos():
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select h.idpedidosheader, h.nombre from pedidosheader h inner join pedidosdesc d ON h.idpedidosheader = d.idheader where d.activo = 1 group by h.idpedidosheader, h.nombre;"
@@ -1233,7 +1234,7 @@ def pedidoshist():
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select h.idpedidosheader, h.nombre from pedidosheader h inner join pedidosdesc d ON h.idpedidosheader = d.idheader where d.activo = 0 group by h.idpedidosheader, h.nombre;"
@@ -1255,7 +1256,7 @@ def ordenescompra():
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select h.idpedidosheader, h.nombre from pedidosheader h inner join ordencompraheader o ON h.idpedidosheader = o.idpedido inner join ordencompradesc d on d.idordencompraheader = o.idordencompraheader where d.activo = 1 group by h.nombre order by h.nombre, h.idpedidosheader;"
@@ -1281,7 +1282,7 @@ def ordencompempresaimprimir(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = '''select ped.nombre, c.codigo, h.fecha, u.nombre, p.nombre, i.nombre, d.presentacion, d.cantidad, d.precio 
@@ -1326,7 +1327,7 @@ def ordencompempresa(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = '''select ped.nombre, c.codigo, h.fecha, u.nombre, p.nombre, i.nombre, d.presentacion, d.cantidad, d.precio 
@@ -1363,7 +1364,7 @@ def ordenescomprahist():
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select h.idpedidosheader, h.nombre from pedidosheader h inner join ordencompraheader o ON h.idpedidosheader = o.idpedido inner join ordencompradesc d on d.idordencompraheader = o.idordencompraheader where d.activo = 0 group by h.nombre order by h.nombre, h.idpedidosheader;"
@@ -1385,7 +1386,7 @@ def ordencomp(idpedido):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select p.nombre, o.idordencompraheader, d.activo from proveedores p inner join ordencompraheader o ON p.idproveedores = o.idproveedor inner join ordencompradesc d ON d.idordencompraheader = o.idordencompraheader where o.idpedido = %s and d.activo = 1 group by p.nombre;"
@@ -1407,7 +1408,7 @@ def ordencomphist(idpedido):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select p.nombre, o.idordencompraheader, d.activo from proveedores p inner join ordencompraheader o ON p.idproveedores = o.idproveedor inner join ordencompradesc d ON d.idordencompraheader = o.idordencompraheader where o.idpedido = %s and d.activo = 0 group by p.nombre;"
@@ -1423,7 +1424,7 @@ def ordencomphist(idpedido):
 @app.route("/liquidacionoc/<id>", methods=['GET', 'POST'])
 def liquidacionoc(id):
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = 'update ordencompradesc set activo=0 where idordencompraheader = ' + str(id) + ';'
@@ -1444,7 +1445,7 @@ def ordencompimprimir(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "Select idproveedor from ordencompraheader where idordencompraheader = %s"
@@ -1506,7 +1507,7 @@ def ordencompdetalles(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "Select idproveedor from ordencompraheader where idordencompraheader = %s"
@@ -1560,7 +1561,7 @@ def ordencompdetalleshist(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = '''SELECT p.nombre, e.nombre, c.codigo, u.nombre, DATE_FORMAT(o.fecha,'%d/%m/%Y') as fecha from ordencompraheader o 
@@ -1595,7 +1596,7 @@ def pedidogen():
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select count(idcotizacionheader) from cotizacionheader where idpedidosheader = 0 and activo = 1;"
@@ -1621,7 +1622,7 @@ def pedido(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select nombre from pedidosheader where idpedidosheader = %s;"
@@ -1652,7 +1653,7 @@ def pedidopdf(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select nombre from pedidosheader where idpedidosheader = %s;"
@@ -1692,7 +1693,7 @@ def editarpedido(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select nombre from pedidosheader where idpedidosheader = %s;"
@@ -1709,7 +1710,7 @@ def editarpedido(id):
 		print("Ocurrió un error al conectar: ", e)
 	if request.method == 'POST':
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					for i in range(cantidad):
@@ -1730,7 +1731,7 @@ def editarpedido(id):
 @app.route("/eliminarregistro/<id>", methods=['GET', 'POST'])
 def eliminarregistro(id):
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "select idheader from pedidosdesc where idpedidosdesc=%s;"
@@ -1755,7 +1756,7 @@ def editarinsumo(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				cursor.execute("SELECT idtipo, tipo from tipo;")
@@ -1792,7 +1793,7 @@ def editarinsumo(id):
 		else:
 			maximos = None
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "UPDATE insumos SET idtipo = %s, codigo = %s, nombre = %s, presentacion = %s, idpeligrosidad = %s, fechavencimiento = %s, minimos = %s, maximos = %s WHERE idinsumos = %s;"
@@ -1814,7 +1815,7 @@ def eliminarinsumo(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "UPDATE insumos SET activo = 0 WHERE idinsumos = %s;"
@@ -1836,7 +1837,7 @@ def desechables():
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				cursor.execute("SELECT i.codigo, i.nombre, i.presentacion, t.tipo, i.existencia, i.idinsumos from insumos i inner join tipo t ON i.idtipo = t.idtipo where i.idtipo=2 and i.activo = 1 order by t.tipo asc, codigo asc;")
@@ -1857,7 +1858,7 @@ def proveedores():
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				cursor.execute("SELECT idproveedores, nombre, telefono, correo, nombrecontacto from proveedores where activo = 1;")
@@ -1879,7 +1880,7 @@ def editarproveedor(id):
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "SELECT idproveedores, nombre, telefono, correo, nombrecontacto from proveedores where activo = 1 and idproveedores = %s;"
@@ -1897,7 +1898,7 @@ def editarproveedor(id):
 		correo = request.form["correo"]
 		nombrecontacto = request.form["nombrecontacto"]
 		try:
-			conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+			conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 			try:
 				with conexion.cursor() as cursor:
 					consulta = "UPDATE proveedores set nombre = %s, telefono = %s, correo = %s, nombrecontacto = %s where idproveedores = %s;"
@@ -1913,7 +1914,7 @@ def editarproveedor(id):
 @app.route("/eliminarproveedor/<id>", methods=['GET', 'POST'])
 def eliminarproveedor(id):
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				consulta = "DELETE FROM proveedores WHERE idproveedores = %s;"
@@ -1934,7 +1935,7 @@ def cristaleria():
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				cursor.execute("SELECT i.codigo, i.nombre, i.presentacion, t.tipo, i.existencia, i.idinsumos from insumos i inner join tipo t ON i.idtipo = t.idtipo where i.idtipo=1 and i.activo = 1 order by t.tipo asc, codigo asc;")
@@ -1955,7 +1956,7 @@ def reactivos():
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				cursor.execute("SELECT i.codigo, i.nombre, i.presentacion, t.tipo, i.existencia, i.idinsumos from insumos i inner join tipo t ON i.idtipo = t.idtipo where i.idtipo=3 and i.activo = 1 order by t.tipo asc, codigo asc;")
@@ -1976,7 +1977,7 @@ def muestras():
 		logeado = 0
 		idtipouser = 0
 	try:
-		conexion = pymysql.connect(host='localhost', user='root', password='database', db='inventario')
+		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
 				cursor.execute("SELECT i.codigo, i.nombre, i.presentacion, t.tipo, i.existencia, i.idinsumos from insumos i inner join tipo t ON i.idtipo = t.idtipo where (i.idtipo=4 or i.idtipo=5) and i.activo = 1 order by t.tipo asc, codigo asc;")
