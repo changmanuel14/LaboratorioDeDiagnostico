@@ -22,8 +22,8 @@
             <td>{{i[3]}}</td>
             <td>{{i[4]}}</td>
             {% if logeado == 1 %}
-            <td><a href="/editarinsumo/{{i[5]}}">Editar</a></td>
-            <td><a href="/eliminarinsumo/{{i[5]}}">Eliminar</a></td>
+            <td><a href="/editarinsumo/{{i[5]}}"><button type="button" class="btn btn-primary">Editar</button></a></td>
+            <td><a href="/eliminarinsumo/{{i[5]}}" onclick="return confirm('¿Estás seguro de eliminar?');"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
             {% endif %}
         </tr>
         {% endfor %}

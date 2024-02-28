@@ -1,20 +1,71 @@
 {% extends "layout.html" %}
 {% block content %}
-    <center><h1>Nuevo usuario</h1>
-        <hr>
-        <form action="" method="POST">
-    <select name="tipouser" id="tipouser" class="inputtext3">
-        <option value="">Seleccione Tipo</option>
-        {% for i in tipos %}
-        <option value="{{i[0]}}">{{i[1]}}</option>
-        {% endfor %}
-    </select><br>
-    <input type="text" id="nombre" name="nombre" class="inputtext1" placeholder="  Nombre"><br>
-    <input type="text" id="user" name="user" class="inputtext1" placeholder="  User"><br>
-    <input type="password" id="pwd" name="pwd" class="inputtext1" placeholder="  Contraseña"><br>
-    <center><button onclick="submit" class="button">Aceptar</button></center>
-</form>
+<center>
+	<h1>Crear Usuario</h1>
 </center>
 
-    
+<hr>
+<form action="" method="POST">
+	<div class="form-row">
+		<div class="col-md-12">
+			<label for="tipouser">Tipo de Usuario*</label>
+			<select name="tipouser" id="tipouser" class="form-control" required>
+				<option value="">Seleccione Tipo</option>
+				{% for i in tipos %}
+				<option value="{{i[0]}}">{{i[1]}}</option>
+				{% endfor %}
+			</select>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-12">
+			<label for="nombre1">Nombre*</label>
+			<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-12">
+			<label for="usuario">Usuario*</label>
+			<input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario" required>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-6">
+			<label for="password">Contraseña*</label>
+			<input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
+		</div>
+		<div class="col-md-6">
+			<label for="confirm_password">Confirmar Contraseña*</label>
+			<input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirmar Contraseña">
+			<small id="password_match_message" class="form-text text-muted"></small>
+		</div>
+	</div>
+	<br>
+	<center>
+		<input class="btn btn-primary" type="submit" value="Aceptar">
+	</center>
+	<br>
+	<hr>
+</form>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const passwordField = document.getElementById('password');
+		const confirmField = document.getElementById('confirm_password');
+		const message = document.getElementById('password_match_message');
+
+		confirmField.addEventListener('input', function() {
+			if (confirmField.value === passwordField.value) {
+				message.textContent = 'Las contraseñas coinciden.';
+				message.classList.remove('text-danger');
+				message.classList.add('text-success');
+			} else {
+				message.textContent = 'Las contraseñas no coinciden.';
+				message.classList.remove('text-success');
+				message.classList.add('text-danger');
+			}
+		});
+	});
+</script>
+
 {% endblock %}

@@ -1,56 +1,66 @@
 {% extends "layout.html" %}
 {% block content %}
-    <center><h1>Editar insumo</h1></center>
-        <hr>
-        <form action="" method="POST">
-            <div class="editardiv">
-                <label for="tipo">Tipo</label>
-                <select name="tipo" id="tipo" class="inputtext">
-                    <option value="">Seleccione Tipo</option>
-                    {% for i in tipos %}
-                    {% if i[0] == insumo[0][0] %}
-                    <option value="{{i[0]}}" selected>{{i[1]}}</option>
-                    {% else %}
-                    <option value="{{i[0]}}">{{i[1]}}</option>
-                    {% endif %}
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="editardiv">
-                <label for="tipo">Código</label><br>
-                <input type="text" id="codigo" name="codigo" class="inputtext" placeholder="  Código" value="{{insumo[0][1]}}">
-            </div>
-            <div class="editardiv">
-                <label for="presentacion">Presentación</label><br>
-                <input type="text" id="presentacion" name="presentacion" class="inputtext" placeholder="  Presentación" value="{{insumo[0][3]}}">
-            </div>
-            <div class="editardiv1">
-                <label for="nombre">Nombre</label><br>
-                <input type="text" id="nombre" name="nombre" class="inputtext" placeholder="  Nombre" value="{{insumo[0][2]}}" >
-            </div><br>
-            
-            <div class="editardiv">
-                <label for="peligrosidad">Peligrosidad</label><br>
-                <input type="text" id="peligrosidad" name="peligrosidad" class="inputtext" placeholder="  Peligrosidad" value="{{insumo[0][4]}}">
-            </div><br>
-            <div class="editardiv">
-                <label for="tipo">Vencimiento</label><br>
-                <input placeholder="  Fecha de Vencimiento" class="inputtext" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="fechaven" value="{{insumo[0][5]}}" name="fechaven"/>
-            </div><br>
-            <div class="editardiv">
-                <label for="min">Mínimos</label><br>
-                <input type="number" id="min" name="min" class="inputtext" placeholder="  Mínimos" value="{{insumo[0][6]}}">
-            </div>
-            <div class="editardiv">
-                <label for="max">Máximos</label><br>
-                <input type="number" step="0.01" id="max" name="max" class="inputtext" placeholder="  Máximos" value="{{insumo[0][7]}}">
-                
-            </div><br>
-    
-    
-    <center><button onclick="submit" class="button">Aceptar</button></center>
+<center>
+	<h1>Editar insumo</h1>
+</center>
+<hr>
+<form action="" method="POST">
+	<div class="form-row">
+		<div class="col-md-6">
+			<label for="tipo">Tipo</label>
+			<select name="tipo" id="tipo" class="form-control">
+				<option value="">Seleccione Tipo</option>
+				{% for i in tipos %}
+				{% if i[0] == insumo[0][0] %}
+				<option value="{{i[0]}}" selected>{{i[1]}}</option>
+				{% else %}
+				<option value="{{i[0]}}">{{i[1]}}</option>
+				{% endif %}
+				{% endfor %}
+			</select>
+		</div>
+		<div class="col-md-6">
+			<label for="tipo">Código</label><br>
+			<input type="text" id="codigo" name="codigo" class="form-control" placeholder="Código"
+				value="{{insumo[0][1]}}">
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-6">
+			<label for="presentacion">Presentación</label><br>
+			<input type="text" id="presentacion" name="presentacion" class="form-control" placeholder="Presentación"
+				value="{{insumo[0][3]}}">
+		</div>
+		<div class="col-md-6">
+			<label for="nombre">Nombre</label><br>
+			<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre"
+				value="{{insumo[0][2]}}">
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-6">
+			<label for="peligrosidad">Peligrosidad</label><br>
+			<input type="text" id="peligrosidad" name="peligrosidad" class="form-control" placeholder="Peligrosidad"
+				value="{{insumo[0][4]}}">
+		</div>
+		<div class="col-md-6">
+			<label for="tipo">Vencimiento</label><br>
+			<input placeholder="Fecha de Vencimiento" class="form-control" type="date" id="fechaven" value="{{insumo[0][5]}}" name="fechaven"/>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-6">
+			<label for="min">Mínimos</label><br>
+			<input type="number" id="min" name="min" class="form-control" placeholder="Mínimos" value="{{insumo[0][6]}}">
+		</div>
+		<div class="col-md-6">
+			<label for="max">Máximos</label><br>
+			<input type="number" step="0.01" id="max" name="max" class="form-control" placeholder="Máximos" value="{{insumo[0][7]}}">
+		</div>
+	</div><br>
+	<center><input class="btn btn-primary" type="submit" value="Aceptar"></center>
 </form>
 
 
-    
+
 {% endblock %}

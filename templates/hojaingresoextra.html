@@ -6,11 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		{% if title %}
-		<title>Sistema de Inventario - {{ title }}</title>
-		{% else %}
-		<title>Sistema de Inventario</title>
-		{% endif %}
+	{% if title %}
+	<title>Sistema de caja - {{ title }}</title>
+	{% else %}
+	<title>Sistema de caja</title>
+	{% endif %}
 	<link rel="icon" href="https://informatica.galileo.edu/images/favicon.ico">
 	<style type="text/css">
 		body {
@@ -84,46 +84,34 @@
 	<main role="main" class="container">
 		<table>
 			<tr>
-				<th style="text-align: left; border: black 1px solid; width: 70%">Universidad Galileo Sede Quetzaltenango<br>Facultad de Ciencias de la Salud<br>Requisición de Insumos por parte de los usuarios</th>
-				<th style="text-align: left; border: black 1px solid; width: 70%">Formulario No: F-003<br><br>Número: </th>
+				<th style="text-align: left; border: black 1px solid; width: 70%">Universidad Galileo Sede Quetzaltenango<br>Facultad de Ciencias de la Salud<br>Formulario de ingreso de insumos extraordinario</th>
+				<th style="text-align: left; border: black 1px solid; width: 70%">Hoja de Ingreso Extraordinario<br><br>Número: </th>
 			</tr>
 		</table>
 		<table style="margin-top: 5px;">
 			<tr>
-				<th style="width: 15%">Solicitante:</th>
-				<td colspan="3"></td>
+				<th style="width: 15%;">Fecha y Hora:</th>
+				<td></td>
 			</tr>
 			<tr>
-				<th style="width: 15%">Fecha y Hora:</th>
-				<td colspan="3"></td>
-			</tr>
-			<tr>
-				<th style="width: 15%">Curso:</th>
-				<td colspan="3"></td>
-			</tr>
-			<tr>
-				<th style="width: 15%;">Carrera:</th>
-				<td style="width: 35%;"></td>
-				<th style="width: 15%;">Semestre:</th>
-				<td style="width: 35%;"></td>
+				<th>Razón:</th>
+				<td></td>
 			</tr>
 		</table>
 		<table class="tabla" style="margin-top: 5px;">
 			<tr>
-				<th colspan="6" style="text-align: center; border: black 1px solid">Listado de Insumos</th>
+				<th colspan="5" style="text-align: center; border: black 1px solid">Listado de Insumos</th>
 			</tr>
 			<tr>
 				<th style="width: 5%;border: black 1px solid">No.</th>
-				<th style="width: 20%;border: black 1px solid">Código</th>
-				<th style="width: 20%;border: black 1px solid">Insumo</th>
-				<th style="width: 20%;border: black 1px solid">Unidad de Medida</th>
-				<th style="width: 15%;border: black 1px solid">Cantidad</th>
-				<th style="width: 20%;border: black 1px solid">Iniciales de quien recibe</th>
+				<th style="width: 25%;border: black 1px solid">Código</th>
+				<th style="width: 25%;border: black 1px solid">Insumo</th>
+				<th style="width: 25%;border: black 1px solid">Unidad de Medida</th>
+				<th style="width: 20%;border: black 1px solid">Cantidad</th>
 			</tr>
-			{% for i in range(20) %}
+			{% for i in range(22) %}
 			<tr>
-				<td class="tdtabla">{{ loop.index }}</td>
-				<td class="tdtabla"></td>
+				<td class="tdtabla">{{i+1}}</td>
 				<td class="tdtabla"></td>
 				<td class="tdtabla"></td>
 				<td class="tdtabla"></td>

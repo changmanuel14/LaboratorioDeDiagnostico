@@ -3,29 +3,39 @@
 
 <h4>Requisición de Insumos por parte de los usuarios</h4><hr>
 <form action="" method="POST">
-    <div style="width: 10%; float: left;">
-        <label class="labelhojareq">Solicitante</label><br>
-        <label class="labelhojareq">Carrera</label><br>
-        <label class="labelhojareq">Fecha</label><br>
-        <label class="labelhojareq">Documento</label>
-    </div>
-    <div style="width: 40%; float: left;">
-        <input type="text" class="inputtext" name="solicitante" id="solicitante" placeholder="  Nombre completo"><br>
-        <input type="text" class="inputtext" name="carrera" id="carrera"  placeholder="  En letras"><br>
-        <input type="date" class="inputtext" name="fecha" id="fecha"><br>
-        <input type="number" class="inputtext" name="numhojareq" id="numhojareq" placeholder="  Número de Hoja de Requisición"><br>
-    </div>
-    <div style="width: 10%; float: left;">
-        <label class="labelhojareq">Curso</label><br>
-        <label class="labelhojareq">Semestre</label><br>
-        <label class="labelhojareq" style="float: right;">No. Insumos</label><br>
-    </div>
-    <div style="width: 40%; float: left;">
-        <input type="text" class="inputtext" name="curso" id="curso" placeholder="  Nombre completo"><br>
-        <input type="text" class="inputtext" name="semestre" id="semestre" placeholder="  En letras"><br>
-        <input type="number" class="inputtext" name="cantidad" id="cantidad" placeholder="  Cantidad" value="1" readonly><br>
-    </div>
-    <br><br><br><br><br><br><br><br>
+	<div class="form-row">
+		<div class="col-md-6">
+			<label for="solicitante">Solicitante</label>
+			<input type="text" class="form-control" name="solicitante" id="solicitante" placeholder="Nombre completo">
+		</div>
+		<div class="col-md-6">
+			<label for="curso">Curso</label>
+			<input type="text" class="form-control" name="curso" id="curso" placeholder="Nombre completo">
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-6">
+			<label for="carrera">Carrera</label>
+			<input type="text" class="form-control" name="carrera" id="carrera"  placeholder="En letras">
+		</div>
+		<div class="col-md-6">
+			<label for="semestre">Semestre</label>
+			<input type="text" class="form-control" name="semestre" id="semestre" placeholder="En letras">
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-md-6">
+			<label for="fecha">Fecha</label>
+			<input type="date" class="form-control" name="fecha" id="fecha">
+		</div>
+		<div class="col-md-6">
+			<label for="numhojareq">Documento</label>
+			<input type="number" class="form-control" name="numhojareq" id="numhojareq" placeholder="Número de Hoja de Requisición">
+		</div>
+	</div>
+	<div class="form-row">
+		<input type="hidden" class="form-control" name="cantidad" id="cantidad" placeholder="  Cantidad" value="1" readonly>
+	</div>
     <hr><h6>Listado de insumos:</h6>
     <table>
         <thead>
@@ -39,11 +49,11 @@
         </thead>
         <tbody id="container">
             <tr>
-                <td><input type="text" id="codigo0" name="codigo0" class="inputtext" placeholder="  Código" onchange="funcion(0)" list="listado1" autocomplete="off" required></td>
-                <td><input type="text" id="nombre0" name="nombre0" class="inputtext" placeholder="  Nombre" onchange="funcion1(0)" list="listado" autocomplete="off"></td>
-                <td><input type="text" id="presentacion0" name="presentacion0" class="inputtext" placeholder="  Presentación" readonly></td>
-                <td><input type="number" class="inputtext" name="cantidad0" id="cantidad0" step="0.01" placeholder="  Cantidad"></td>
-                <td><input type="text" class="inputtext" name="recibe0" id="recibe0" placeholder="  Iniciales"></td>
+                <td><input type="text" id="codigo0" name="codigo0" class="form-control" placeholder="Código" onchange="funcion(0)" list="listado1" autocomplete="off" required></td>
+                <td><input type="text" id="nombre0" name="nombre0" class="form-control" placeholder="Nombre" onchange="funcion1(0)" list="listado" autocomplete="off"></td>
+                <td><input type="text" id="presentacion0" name="presentacion0" class="form-control" placeholder="Presentación" readonly></td>
+                <td><input type="number" class="form-control" name="cantidad0" id="cantidad0" step="0.01" placeholder="Cantidad"></td>
+                <td><input type="text" class="form-control" name="recibe0" id="recibe0" placeholder="  Iniciales"></td>
             </tr>
         </tbody>
     </table><br>
@@ -70,8 +80,8 @@
         input.type = 'text';
         input.name = 'codigo' + String(cant);
         input.id = 'codigo' + String(cant);
-        input.className = 'inputtext';
-        input.placeholder = "  Código";
+        input.className = 'form-control';
+        input.placeholder = "Código";
         input.setAttribute('onchange', 'funcion('+String(cant)+')');
         input.setAttribute('list', 'listado1');
         input.autocomplete = 'off';
@@ -80,8 +90,8 @@
         input1.type = 'text';
         input1.name = 'nombre' + String(cant);
         input1.id = 'nombre' + String(cant);
-        input1.className = 'inputtext';
-        input1.placeholder = "  Nombre";
+        input1.className = 'form-control';
+        input1.placeholder = "Nombre";
         input1.setAttribute('onchange', 'funcion1('+String(cant)+')');
         input1.setAttribute('list', 'listado');
         input1.autocomplete = 'off';
@@ -90,8 +100,8 @@
         input2.type = 'text';
         input2.name = 'presentacion' + String(cant);
         input2.id = 'presentacion' + String(cant);
-        input2.className = 'inputtext';
-        input2.placeholder = "  Presentación";
+        input2.className = 'form-control';
+        input2.placeholder = "Presentación";
         input2.readOnly = 'on';
         input2.required = true;
         var input3 = document.createElement('input');
@@ -99,14 +109,14 @@
         input3.step = '0.01'
         input3.name = 'cantidad' + String(cant);
         input3.id = 'cantidad' + String(cant);
-        input3.className = 'inputtext';
-        input3.placeholder = "  Cantidad";
+        input3.className = 'form-control';
+        input3.placeholder = "Cantidad";
         input3.required = true;
         var input4 = document.createElement('input');
         input4.type = 'text';
         input4.name = 'recibe' + String(cant);
         input4.id = 'recibe' + String(cant);
-        input4.className = 'inputtext';
+        input4.className = 'form-control';
         input4.placeholder = "  Iniciales";
         input4.required = true;
 

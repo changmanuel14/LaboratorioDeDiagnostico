@@ -2,15 +2,15 @@
 {% block content %}
     <h1>{{nombre}}</h1>
     <form action="" method="POST">
-        <select name="proveedor" id="proveedor" class="inputtext3" onchange="nuevoprov()">
+        <select name="proveedor" id="proveedor" class="form-control" onchange="nuevoprov()">
             <option value="">Seleccione proveedor</option>
             <option value="Nuevo">Nuevo Proveedor</option>
             {% for i in proveedores %}
             <option value="{{i[0]}}">{{i[1]}}</option>
             {% endfor %}
         </select>
-        <input type="text" name="nuevoproveedor" id="nuevoproveedor" class="inputtext3" placeholder=" Nombre proveedor" disabled>
-        <input type="text" name="numdoc" id="numdoc" class="inputtext3" placeholder=" No. Documento">
+        <input type="text" name="nuevoproveedor" id="nuevoproveedor" class="form-control" placeholder=" Nombre proveedor" disabled>
+        <input type="text" name="numdoc" id="numdoc" class="form-control" placeholder=" No. Documento">
         <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
         <table class="sortable">
         <tr>
