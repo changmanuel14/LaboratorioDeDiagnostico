@@ -1,43 +1,53 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>{{ nombreped }}</h1>
-    <form action="" method="POST">   
-    <table>
-        <tr>
-            <th>No.</th>
-            <th>Insumo</th>
-            <th>Presentación</th>
-            <th colspan="3"><center>Cantidad</center></th>
-            <th>Eliminar</th>
-        </tr>
-        {% for i in range(cantidad) %}
-        <tr>
-            <td>{{i + 1}}</td>
-            <td>{{insumos[i][0]}}</td>
-            <td><input type="text" id="presentacion{{i}}" name="presentacion{{i}}" value="{{insumos[i][1]}}"> </td>
-            <td><button type="button" class="masmenos" onclick="menos({{i}})">-</button></td>
-            <td><center><input type="number" step="0.01" id="cant{{i}}" name="cant{{i}}" class="masmenos" value="{{insumos[i][2]}}"></center></td>
-            <td><button type="button" class="masmenos" onclick="mas({{i}})">+</button></td>
-            <td><button type="button" class="masmenos"><a href="/eliminarregistro/{{insumos[i][3]}}">Eliminar</a></button></td>
-        </tr>
-        {% endfor %}
-    </table>
-    <center><button onclick="submit" class="button">Guardar cambios</button></center>
-    </form>
-    <script>
-        function menos(num) {
-            var aux = "cant" + String(num)
-            var cant = document.getElementById(aux).value;
-            cant = parseFloat(cant);
-            cant = cant - 1;
-            document.getElementById(aux).value = cant;
-        }
-        function mas(num) {
-            var aux = "cant" + String(num)
-            var cant = document.getElementById(aux).value;
-            cant = parseFloat(cant);
-            cant = cant + 1;
-            document.getElementById(aux).value = cant;
-        }
-    </script>
+<h1>{{ nombreped }}</h1>
+<form action="" method="POST">
+	<table>
+		<tr>
+			<th>No.</th>
+			<th>Insumo</th>
+			<th>Presentación</th>
+			<th colspan="3">
+				<center>Cantidad</center>
+			</th>
+			<th>Eliminar</th>
+		</tr>
+		{% for i in range(cantidad) %}
+		<tr>
+			<td>{{i + 1}}</td>
+			<td>{{insumos[i][0]}}</td>
+			<td><input type="text" id="presentacion{{i}}" name="presentacion{{i}}" value="{{insumos[i][1]}}"> </td>
+			<td><button type="button" class="masmenos" onclick="menos({{i}})">-</button></td>
+			<td>
+				<center><input type="number" step="0.01" id="cant{{i}}" name="cant{{i}}" class="masmenos"
+						value="{{insumos[i][2]}}"></center>
+			</td>
+			<td><button type="button" class="masmenos" onclick="mas({{i}})">+</button></td>
+			<td><button type="button" class="masmenos"><a
+						href="/eliminarregistro/{{insumos[i][3]}}">Eliminar</a></button></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<center><button onclick="submit" class="button">Guardar cambios</button></center>
+</form>
+<script>
+	function menos(num) {
+		var aux = "cant" + String(num)
+		var cant = document.getElementById(aux).value;
+		cant = parseFloat(cant);
+		cant = cant - 1;
+		document.getElementById(aux).value = cant;
+	}
+	function mas(num) {
+		var aux = "cant" + String(num)
+		var cant = document.getElementById(aux).value;
+		cant = parseFloat(cant);
+		cant = cant + 1;
+		document.getElementById(aux).value = cant;
+	}
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
 {% endblock %}

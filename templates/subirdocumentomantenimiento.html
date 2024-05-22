@@ -27,25 +27,9 @@
 <h6>*Solo documentos PDF, JPG, JPEG, PNG y GIF estan admitidos</h6>
 <form action="" method="POST" enctype=multipart/form-data>
 	<div class="form-row">
-		<div class="col-md-6">
-			{% if factura == 0 %}
-			<label for="factura">Factura</label>
-			<input type="file" class="form-control" id="factura" name="factura" accept="image/jpeg,image/gif,image/png,application/pdf">
-			{% elif factura == 1 %}
-			<div class="alert alert-success" role="alert">
-				Ya se ha adjuntado Factura!
-			</div>
-			{% endif %}
-		</div>
-		<div class="col-md-6">
-			{% if boleta == 0 %}
-			<label for="boleta">Boleta</label>
-			<input type="file" class="form-control" id="boleta" name="boleta" accept="image/jpeg,image/gif,image/png,application/pdf">
-			{% elif notaenvio == 1 %}
-			<div class="alert alert-success" role="alert">
-				Ya se ha adjuntado Boleta!
-			</div>
-			{% endif %}
+		<div class="col-md-12">
+			<label for="documento">Documento</label>
+			<input type="file" class="form-control" id="documento" name="documento" accept="image/jpeg,image/gif,image/png,application/pdf">
 		</div>
 	</div>
 	<br>
