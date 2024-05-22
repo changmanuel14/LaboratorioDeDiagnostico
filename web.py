@@ -2108,8 +2108,8 @@ def mantenimientos(id):
 		conexion = pymysql.connect(host=Conhost, user=Conuser, password=Conpassword, db=Condb)
 		try:
 			with conexion.cursor() as cursor:
-				consulta = "SELECT idmantenimiento, proveedor, fecha, documento from mantenimiento where idequipo = %s order by fecha desc;"
-				cursor.execute(consulta, id)
+				consulta = f"SELECT idmantenimiento, proveedor, DATE_FORMAT(fecha,'%d/%m/%Y'), documento from mantenimiento where idequipo = {id} order by fecha desc;"
+				cursor.execute(consulta)
 			# Con fetchall traemos todas las filas
 				mantenimientos = cursor.fetchall()
 				consulta = "SELECT nombre, codigo, marca from equipo where idequipo = %s;"
