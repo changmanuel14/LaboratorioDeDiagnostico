@@ -1,15 +1,23 @@
 {% extends "layout.html" %}
 {% block content %}
-    <center><h1>Editar proveedor</h1>
-        <hr>
-        <form action="" method="POST">
-    <input type="text" id="nombre" name="nombre" class="inputtext3" placeholder="  Nombre" required value="{{proveedor[0][1]}}">
-    <input type="number" id="telefono" name="telefono" class="inputtext3" placeholder="  Telefono" required value="{{proveedor[0][2]}}">
-    <input type="email" id="correo" name="correo" class="inputtext3" placeholder="  Correo" value="{{proveedor[0][3]}}"><br>
-    <center><input type="text" id="nombrecontacto" name="nombrecontacto" class="inputtext3" placeholder="  Nombre de Contacto" value="{{proveedor[0][4]}}" required></center>
-    <center><button onclick="submit" class="button">Aceptar</button></center>
-</form>
+<center>
+	<h1>Editar proveedor</h1>
+	<hr>
+	<form action="" method="POST">
+		<input type="text" id="nombre" name="nombre" class="inputtext3" placeholder="  Nombre" required
+			value="{{proveedor[0][1]}}">
+		<input type="number" id="telefono" name="telefono" class="inputtext3" placeholder="  Telefono" required
+			value="{{proveedor[0][2]}}">
+		<input type="email" id="correo" name="correo" class="inputtext3" placeholder="  Correo"
+			value="{{proveedor[0][3]}}"><br>
+		<center><input type="text" id="nombrecontacto" name="nombrecontacto" class="inputtext3"
+				placeholder="  Nombre de Contacto" value="{{proveedor[0][4]}}" required></center>
+		<center><button onclick="submit" class="button">Aceptar</button></center>
+	</form>
 </center>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
 
-    
 {% endblock %}

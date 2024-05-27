@@ -1,31 +1,48 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Muestras</h1>
-    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
-    <table class="sortable">
-        <tr>
-            <th>Codigo</th>
-            <th>Nombre</th>
-            <th>Presentacion</th>
-            <th>Tipo</th>
-            <th>Existencia</th>
-            {% if logeado == 1 %}
-            <th>Editar</th>
-            <th>Eliminar</th>
-            {% endif %}
-        </tr>
-        {% for i in insumos %}
-        <tr>
-            <td>{{i[0]}}</td>
-            <td>{{i[1]}}</td>
-            <td>{{i[2]}}</td>
-            <td>{{i[3]}}</td>
-            <td>{{i[4]}}</td>
-            {% if logeado == 1 %}
-            <td><a href="/editarinsumo/{{i[5]}}"><button type="button" class="btn btn-primary">Editar</button></a></td>
-            <td><a href="/eliminarinsumo/{{i[5]}}" onclick="return confirm('¿Estás seguro de eliminar?');"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
-            {% endif %}
-        </tr>
-        {% endfor %}
-    </table>
+<h1>Muestras</h1>
+<table class="table table-striped sortable" id="sampleTable">
+	<thead>
+		<tr>
+			<th>Codigo</th>
+			<th>Nombre</th>
+			<th>Presentacion</th>
+			<th>Tipo</th>
+			<th>Existencia</th>
+			{% if logeado == 1 %}
+			<th>Editar</th>
+			<th>Eliminar</th>
+			{% endif %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for i in insumos %}
+		<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			<td>{{i[2]}}</td>
+			<td>{{i[3]}}</td>
+			<td>{{i[4]}}</td>
+			{% if logeado == 1 %}
+			<td><a href="/editarinsumo/{{i[5]}}"><button type="button" class="btn btn-primary">Editar</button></a></td>
+			<td><a href="/eliminarinsumo/{{i[5]}}" onclick="return confirm('¿Estás seguro de eliminar?');"><button
+						type="button" class="btn btn-danger">Eliminar</button></a></td>
+			{% endif %}
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<script>
+	$(document).ready(function () {
+		$("#sampleTable").fancyTable({
+			inputPlaceholder: 'Buscar',
+			pagination: true,
+			perPage: 20
+		});
+	});
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
 {% endblock %}
