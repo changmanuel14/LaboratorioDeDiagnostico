@@ -103,10 +103,8 @@
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								{% if logeado == 1 %}
-								{% if idtipouser == 1 %}
 								<a class="dropdown-item" href="/nuevoinsumo">Nuevo</a>
 								<div class="dropdown-divider"></div>
-								{% endif %}
 								{% endif %}
 								<a class="dropdown-item" href="/cristaleria">Cristaleria</a>
 								<a class="dropdown-item" href="/desechables">Desechables</a>
@@ -115,7 +113,7 @@
 								{% if logeado == 1 %}
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/hojareq">Imprimir hoja de requisición</a>
-								<a class="dropdown-item" href="/hojareq">Imprimir formulario de Ingreso Extraordinario</a>
+								<a class="dropdown-item" href="/hojaingresoextra">Imprimir formulario de Ingreso Extraordinario</a>
 								{% endif %}
 							</div>
 						</li>

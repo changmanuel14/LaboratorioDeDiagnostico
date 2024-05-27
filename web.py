@@ -671,7 +671,7 @@ def crearusuario():
 		print("Ocurrió un error al conectar: ", e)
 	if request.method == 'POST':
 		nombre = request.form["nombre"]
-		user = request.form["user"]
+		user = request.form["usuario"]
 		pwd = request.form["password"]
 		tipouser = request.form["tipouser"]
 		try:
